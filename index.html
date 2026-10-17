@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paciscor | The Social Network for Tech Minds</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpeg" href="./android-chrome-512x512.png">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#eef2ff',
+                            100: '#e0e7ff',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                            900: '#1e1b4b',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-slate-900 text-slate-100 font-sans antialiased selection:bg-indigo-500 selection:text-white">
+
+    <!-- Notification Toast -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none bg-slate-800 border border-slate-700 text-white px-5 py-3.5 rounded-xl shadow-2xl flex items-center space-x-3">
+        <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+        </svg>
+        <span id="toast-message" class="text-sm font-medium">Action successful!</span>
+    </div>
+
+    <!-- Navigation Bar -->
+    <header class="fixed top-0 inset-x-0 z-40 bg-slate-900/80 backdrop-blur-md border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#" class="flex items-center space-x-3 group">
+                <div class="w-10 h-10 rounded-xl overflow-hidden bg-slate-800 border border-slate-700/80 flex items-center justify-center shadow-lg shadow-indigo-500/10 group-hover:scale-105 transition-transform">
+                    <img src="./android-chrome-512x512.png" alt="Paciscor Logo" class="w-full h-full object-cover">
+                </div>
+                <span class="text-xl font-extrabold tracking-tight text-white">Paciscor<span class="text-indigo-400">.</span></span>
+            </a>
+
+            <!-- Desktop Links -->
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-slate-300">
+                <a href="#about" class="hover:text-white transition-colors">Our Mission</a>
+                <a href="#features" class="hover:text-white transition-colors">Platform</a>
+                <a href="#team" class="hover:text-white transition-colors">Team</a>
+                <a href="#contact" class="hover:text-white transition-colors">Apply for Seed Program</a>
+            </nav>
+
+            <!-- CTA Button -->
+            <div class="hidden md:flex items-center space-x-4">
+                <a href="#contact" class="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold shadow-lg shadow-indigo-600/30 transition-all hover:shadow-indigo-600/50">
+                    Get Early Access
+                </a>
+            </div>
+
+            <!-- Mobile Menu Toggle Button -->
+            <button id="mobile-menu-btn" aria-label="Toggle menu" class="md:hidden p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Mobile Nav Menu -->
+        <div id="mobile-menu" class="hidden md:hidden px-4 pt-2 pb-6 space-y-3 bg-slate-900 border-b border-slate-800">
+            <a href="#about" class="mobile-link block px-3 py-2 rounded-lg text-base font-medium text-slate-300 hover:bg-slate-800 hover:text-white">Our Mission</a>
+            <a href="#features" class="mobile-link block px-3 py-2 rounded-lg text-base font-medium text-slate-300 hover:bg-slate-800 hover:text-white">Platform</a>
+            <a href="#team" class="mobile-link block px-3 py-2 rounded-lg text-base font-medium text-slate-300 hover:bg-slate-800 hover:text-white">Team</a>
+            <a href="#contact" class="mobile-link block px-3 py-2 rounded-lg text-base font-medium text-slate-300 hover:bg-slate-800 hover:text-white">Join Beta</a>
+            <a href="#contact" class="mobile-link block w-full text-center mt-3 px-5 py-3 rounded-xl bg-indigo-600 text-white font-semibold shadow-lg">Get Early Access</a>
+        </div>
+    </header>
+
+    <main class="pt-20">
+        <!-- Hero Section -->
+        <section class="relative overflow-hidden py-24 lg:py-32 flex items-center justify-center">
+            <!-- Background Glows -->
+            <div class="absolute -top-40 left-1/2 -translate-x-1/2 w-[700px] h-[500px] bg-gradient-to-tr from-indigo-600/30 via-violet-600/20 to-transparent blur-[120px] rounded-full pointer-events-none"></div>
+
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-indigo-500/30 bg-indigo-500/10 text-indigo-300 text-xs font-semibold mb-8">
+                    <span class="w-2 h-2 rounded-full bg-indigo-400 animate-pulse"></span>
+                    The Social Network for Tech Minds
+                </div>
+                <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.1]">
+                    The social network built for <br class="hidden sm:inline" />
+                    <span class="bg-gradient-to-r from-indigo-400 via-violet-300 to-indigo-200 bg-clip-text text-transparent">
+                        everyone who loves tech.
+                    </span>
+                </h1>
+                <p class="mt-6 text-lg sm:text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
+                    Share your builds, discuss breakthroughs, connect with fellow builders, and get discovered by collaborators and investors looking for the next big thing.
+                </p>
+
+                <!-- Hero CTAs -->
+                <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <a href="#contact" class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold shadow-lg shadow-indigo-600/30 transition hover:-translate-y-0.5">
+                        Publish Your Startup
+                    </a>
+                    <a href="#features" class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 font-semibold transition">
+                        Explore as an Investor
+                    </a>
+                </div>
+
+                <!-- Startup & Community Metrics -->
+                <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6 pt-12 border-t border-slate-800/80">
+                    <div>
+                        <div class="text-3xl font-bold text-white">1-Click</div>
+                        <div class="text-xs sm:text-sm text-slate-400 mt-1">Git Repo Verification</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl font-bold text-white">Direct</div>
+                        <div class="text-xs sm:text-sm text-slate-400 mt-1">Investor Dealflow</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl font-bold text-white">Zero</div>
+                        <div class="text-xs sm:text-sm text-slate-400 mt-1">Cold Pitch Overhead</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl font-bold text-white">100%</div>
+                        <div class="text-xs sm:text-sm text-slate-400 mt-1">Founder IP Control</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About / Mission Section -->
+        <section id="about" class="py-20 bg-slate-900/60 border-y border-slate-800/60">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <h2 class="text-xs uppercase tracking-widest font-bold text-indigo-400">Our Mission</h2>
+                        <p class="mt-2 text-3xl sm:text-4xl font-extrabold text-white">More than just scrolling. A space to share what you're building.</p>
+                        <p class="mt-4 text-slate-400 leading-relaxed">
+                            Most social networks drown out authentic tech talk with algorithms, generic hot takes, and noise. We wanted a dedicated home where developers, hobbyists, designers, and tech enthusiasts can geek out on ideas, post their code, and actually find people on their wavelength.
+                        </p>
+                        <p class="mt-3 text-slate-400 leading-relaxed">
+                            Whether you're showing off a weekend hack, looking for feedback from peers, finding a co-builder, or putting your ideas in front of investors who scout the platform for hidden talent—Paciscor turns tech conversations into real-world momentum.
+                        </p>
+                    </div>
+                    <div class="relative bg-gradient-to-br from-indigo-500/10 to-violet-500/5 p-8 rounded-2xl border border-slate-800 shadow-xl">
+                        <div class="flex items-center justify-between mb-6 border-b border-slate-800 pb-4">
+                            <div class="flex items-center space-x-2">
+                                <span class="w-3 h-3 rounded-full bg-rose-500 inline-block"></span>
+                                <span class="w-3 h-3 rounded-full bg-amber-500 inline-block"></span>
+                                <span class="w-3 h-3 rounded-full bg-emerald-500 inline-block"></span>
+                            </div>
+                            <span class="text-xs text-indigo-400 font-mono font-medium">Paciscor Match Engine</span>
+                        </div>
+                        <div class="space-y-4 font-mono text-sm">
+                            <div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800">
+                                <p class="text-xs text-slate-500">// Developer Pipeline</p>
+                                <p class="text-emerald-400 font-semibold mt-1">repo: syndicate-engine/core</p>
+                                <p class="text-xs text-slate-400 mt-1">Commits verified • Architecture scored 98/100</p>
+                            </div>
+                            <div class="flex justify-center text-indigo-400 text-xs">
+                                <span>↓ Synced to Dealflow Feed ↓</span>
+                            </div>
+                            <div class="p-3 bg-slate-900/80 rounded-xl border border-slate-800">
+                                <p class="text-xs text-slate-500">// Investor Dashboard</p>
+                                <div class="flex justify-between items-center mt-1">
+                                    <span class="text-white text-xs">Pre-Seed Candidate Matched</span>
+                                    <span class="px-2 py-0.5 rounded text-[10px] bg-emerald-500/20 text-emerald-300">Active Review</span>
+                                </div>
+                                <p class="text-xs text-slate-400 mt-1">Direct founder intros & data room open</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Grid -->
+        <section id="features" class="py-24">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <h2 class="text-xs uppercase tracking-widest font-bold text-indigo-400">The Ecosystem</h2>
+                    <p class="mt-2 text-3xl sm:text-4xl font-extrabold text-white">Built for Builders. Curated for Capital.</p>
+                    <p class="mt-4 text-slate-400">Replace endless slide decks with real repositories and direct communication channels.</p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- Feature Card 1 -->
+                    <div class="bg-slate-800/50 hover:bg-slate-800 border border-slate-700/60 hover:border-indigo-500/50 p-8 rounded-2xl transition duration-300 group">
+                        <div class="w-12 h-12 rounded-xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-indigo-600 group-hover:text-white transition">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Publish & Showcase Repos</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed">
+                            Publish working software, architectural designs, and prototypes directly from your Git repositories without building throwaway marketing sites.
+                        </p>
+                    </div>
+
+                    <!-- Feature Card 2 -->
+                    <div class="bg-slate-800/50 hover:bg-slate-800 border border-slate-700/60 hover:border-indigo-500/50 p-8 rounded-2xl transition duration-300 group">
+                        <div class="w-12 h-12 rounded-xl bg-violet-500/10 text-violet-400 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-violet-600 group-hover:text-white transition">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Peer Collaboration & Teams</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed">
+                            Find technical co-founders, peer reviewers, and early domain contributors who believe in your mission and want to build alongside you.
+                        </p>
+                    </div>
+
+                    <!-- Feature Card 3 -->
+                    <div class="bg-slate-800/50 hover:bg-slate-800 border border-slate-700/60 hover:border-indigo-500/50 p-8 rounded-2xl transition duration-300 group">
+                        <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-emerald-600 group-hover:text-white transition">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">One-Stop Investor Dealflow</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed">
+                            Investors gain a high-signal discovery feed to filter startups by tech stack, development velocity, and founder credentials with instant contact privileges.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Team Section (4 Founders) -->
+        <section id="team" class="py-24 bg-slate-900/60 border-t border-slate-800/60">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <h2 class="text-xs uppercase tracking-widest font-bold text-indigo-400">The Founders</h2>
+                    <p class="mt-2 text-3xl sm:text-4xl font-extrabold text-white">Meet the crew behind Paciscor</p>
+                    <p class="mt-4 text-slate-400">A passionate group of college students building tools for the next generation of founders.</p>
+                </div>
+
+                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Founder 1 -->
+                    <div class="bg-slate-800/40 border border-slate-700/60 rounded-2xl p-6 text-center hover:border-slate-600 transition flex flex-col justify-between">
+                        <div>
+                            <div class="w-20 h-20 mx-auto rounded-full bg-gradient-to-tr from-indigo-500 to-purple-500 p-1 mb-4">
+                                <div class="w-full h-full bg-slate-800 rounded-full flex items-center justify-center text-lg font-bold text-indigo-300">
+                                    RD
+                                </div>
+                            </div>
+                            <h3 class="text-lg font-bold text-white">Robert Deal</h3>
+                            <p class="text-indigo-400 text-xs font-semibold uppercase tracking-wider mt-0.5">Lead Founder</p>
+                            <p class="mt-3 text-slate-400 text-sm">Passionate about economics, strategic operations, and startup business models.</p>
+                        </div>
+                    </div>
+
+                    <!-- Founder 2 -->
+                    <div class="bg-slate-800/40 border border-slate-700/60 rounded-2xl p-6 text-center hover:border-slate-600 transition flex flex-col justify-between">
+                        <div>
+                            <div class="w-20 h-20 mx-auto rounded-full bg-gradient-to-tr from-violet-500 to-pink-500 p-1 mb-4">
+                                <div class="w-full h-full bg-slate-800 rounded-full flex items-center justify-center text-lg font-bold text-violet-300">
+                                    JB
+                                </div>
+                            </div>
+                            <h3 class="text-lg font-bold text-white">Joel Butler</h3>
+                            <p class="text-indigo-400 text-xs font-semibold uppercase tracking-wider mt-0.5">Server Mgmt & Security</p>
+                            <p class="mt-3 text-slate-400 text-sm">Server and Web Security</p>
+                        </div>
+                    </div>
+
+                    <!-- Founder 3 -->
+                    <div class="bg-slate-800/40 border border-slate-700/60 rounded-2xl p-6 text-center hover:border-slate-600 transition flex flex-col justify-between">
+                        <div>
+                            <div class="w-20 h-20 mx-auto rounded-full bg-gradient-to-tr from-emerald-500 to-teal-500 p-1 mb-4">
+                                <div class="w-full h-full bg-slate-800 rounded-full flex items-center justify-center text-lg font-bold text-emerald-300">
+                                    DV
+                                </div>
+                            </div>
+                            <h3 class="text-lg font-bold text-white">Dev</h3>
+                            <p class="text-indigo-400 text-xs font-semibold uppercase tracking-wider mt-0.5">Growth & Design</p>
+                            <p class="mt-3 text-slate-400 text-sm">Leading product marketing, developer experience, and design strategy.</p>
+                        </div>
+                    </div>
+
+                    <!-- Founder 4 -->
+                    <div class="bg-slate-800/40 border border-slate-700/60 rounded-2xl p-6 text-center hover:border-slate-600 transition flex flex-col justify-between">
+                        <div>
+                            <div class="w-20 h-20 mx-auto rounded-full bg-gradient-to-tr from-amber-500 to-orange-500 p-1 mb-4">
+                                <div class="w-full h-full bg-slate-800 rounded-full flex items-center justify-center text-lg font-bold text-amber-300">
+                                    CF
+                                </div>
+                            </div>
+                            <h3 class="text-lg font-bold text-white">Kristian</h3>
+                            <p class="text-indigo-400 text-xs font-semibold uppercase tracking-wider mt-0.5">Legal and Compliance</p>
+                            <p class="mt-3 text-slate-400 text-sm">Legal and Compliance I Guess?</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter & Contact Section -->
+        <section id="contact" class="py-24 relative overflow-hidden">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="bg-gradient-to-b from-slate-800 to-slate-800/70 border border-slate-700 rounded-3xl p-8 sm:p-12 shadow-2xl text-center">
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Apply for Seed Program</h2>
+                    <p class="mt-4 text-slate-400 max-w-xl mx-auto">
+                        Whether you are a developer looking for capital or an angel hunting your next portfolio win, secure your spot on Paciscor today.
+                    </p>
+
+                    <!-- Interactive Form -->
+                    <form id="signup-form" class="mt-8 flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+                        <input 
+                            type="email" 
+                            id="email-input" 
+                            required 
+                            placeholder="Enter your university or work email" 
+                            class="flex-1 px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm"
+                        >
+                        <button 
+                            type="submit" 
+                            class="px-6 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-sm transition shadow-lg shadow-indigo-600/30 whitespace-nowrap"
+                        >
+                            Request Invite
+                        </button>
+                    </form>
+                    <p class="text-xs text-slate-500 mt-4">We respect your privacy. No spam, ever.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-800 bg-slate-950 py-12 text-slate-400 text-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
+            <div class="flex items-center space-x-3">
+                <div class="w-8 h-8 rounded-lg overflow-hidden bg-slate-800 border border-slate-700/80 flex items-center justify-center">
+                    <img src="./android-chrome-512x512.png" alt="Paciscor Logo" class="w-full h-full object-cover">
+                </div>
+                <span class="font-bold text-white tracking-tight">Paciscor Inc.</span>
+                <span class="text-xs text-slate-500">© <span id="current-year"></span> All rights reserved.</span>
+            </div>
+
+            <!-- Links -->
+            <div class="flex space-x-6 text-sm">
+                <a href="#about" class="hover:text-white transition">Our Mission</a>
+                <a href="#features" class="hover:text-white transition">Platform</a>
+                <a href="#team" class="hover:text-white transition">Team</a>
+                <a href="#contact" class="hover:text-white transition">Apply for Seed Program</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive JavaScript -->
+    <script>
+        // Dynamic current year
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // Mobile Menu Toggle
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Toast Notification Helper
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toast-message');
+            toastMsg.textContent = message;
+            toast.classList.remove('opacity-0', 'translate-y-24');
+            toast.classList.add('opacity-100', 'translate-y-0');
+
+            setTimeout(() => {
+                toast.classList.remove('opacity-100', 'translate-y-0');
+                toast.classList.add('opacity-0', 'translate-y-24');
+            }, 3500);
+        }
+
+        // Signup Handler
+        const signupForm = document.getElementById('signup-form');
+        signupForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const emailInput = document.getElementById('email-input');
+            const email = emailInput.value.trim();
+
+            if (email) {
+                showToast("Thanks! You've been added to the Paciscor priority queue.");
+                emailInput.value = '';
+            }
+        });
+    </script>
+</body>
+</html>
